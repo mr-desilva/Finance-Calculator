@@ -1,0 +1,157 @@
+package sample;
+
+import com.sun.xml.internal.ws.api.server.EndpointReferenceExtensionContributor;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
+
+
+public class Main extends Application {
+
+    private void loan(){
+        TextField first = new TextField();
+        first.setLayoutY(50);
+        first.setLayoutX(50);
+
+        TextField second = new TextField();
+        second.setLayoutX(50);
+        second.setLayoutY(100);
+
+        Button confirm = new Button("confirm");
+        confirm.setLayoutX(50);
+        confirm.setLayoutY(150);
+
+        TextField ans = new TextField();
+        ans.setLayoutX(50);
+        ans.setLayoutY(400);
+
+        //custom keyboard
+        TextField textField = new TextField();
+        textField.setLayoutX(250);
+        textField.setLayoutY(200);
+
+        Button kFirst = new Button("1");
+        kFirst.setLayoutX(250);
+        kFirst.setLayoutY(50);
+        Button kSecond = new Button("2");
+        kSecond.setLayoutX(250);
+        kSecond.setLayoutY(100);
+        Button kThird = new Button("3");
+        kThird.setLayoutX(250);
+        kThird.setLayoutY(150);
+
+        Button[] buttonArray = {kFirst,kSecond,kThird};
+
+
+        for (Button button : buttonArray) {
+            button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    textField.setText(button.getText());
+                    String tempnum = "";
+                    tempnum = button.getText() + tempnum;
+                }
+            });
+        }
+
+
+
+        //all the formulas logic
+        confirm.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String val;
+                val = first.getText()+second.getText();
+                ans.setText(val);
+            }
+        });
+
+
+
+        Pane roots = new Pane();
+        roots.setPrefSize(600,900);
+        roots.getChildren().add(first);
+        roots.getChildren().add(second);
+        roots.getChildren().add(confirm);
+        roots.getChildren().add(ans);
+        roots.getChildren().add(kFirst);
+        roots.getChildren().add(kSecond);
+        roots.getChildren().add(kThird);
+        roots.getChildren().add(textField);
+
+        Stage loanStage = new Stage();
+
+        loanStage.setScene(new Scene(roots, 300, 275));
+        loanStage.showAndWait();
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        while (true){
+
+            Button fixed_Deposit=new Button("Fixed Deposit");
+            fixed_Deposit.setLayoutY(50);
+            fixed_Deposit.setLayoutX(50);
+
+            Button savings=new Button("Savings");
+            savings.setLayoutX(50);
+            savings.setLayoutY(100);
+
+            Button loan=new Button("Loan");
+            loan.setLayoutX(50);
+            loan.setLayoutY(150);
+
+            Button mortgage=new Button("Mortgage");
+            mortgage.setLayoutX(50);
+            mortgage.setLayoutY(200);
+
+            //Calling the loan window
+            loan.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    loan();
+                }
+            });
+
+            fixed_Deposit.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    //fi
+                }
+            });
+
+
+            Pane roots = new Pane();
+            roots.setPrefSize(600,700);
+            roots.getChildren().add(fixed_Deposit);
+            roots.getChildren().add(savings);
+            roots.getChildren().add(loan);
+            roots.getChildren().add(mortgage);
+
+            Stage menuStage = new Stage();
+
+            menuStage.setScene(new Scene(roots, 300, 275));
+            menuStage.showAndWait();
+        }
+
+    }
+
+
+
+
+
+
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
